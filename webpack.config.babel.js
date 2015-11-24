@@ -40,7 +40,16 @@ export default {
             {
                 test: /\.less$/,
                 loader: 'style!css!less'
+            },
+            {
+                test: /\.(png|jpg|svg)$/,
+                loader: 'url?limit=8192&name=[name].[ext]'
+            },
+            {
+                test: /\.(eot|ttf|woff|svg|svgz|otf)$/,
+                loader: 'file?name=fonts/[name].[ext]'
             }
+
         ]
     },
     resolve: {
