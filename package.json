@@ -5,7 +5,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack -p --bail",
     "server": "nodemon --exec babel-node -- server.js",
-    "prepare": "npm prune && npm install -g grunt-cli webpack webpack-dev-server && npm install",
+    "prepare": "npm prune && npm install -g webpack webpack-dev-server && npm install",
     "watch": "webpack --progress --watch",
     "hot": "webpack-dev-server --inline --hot --progress"
   },

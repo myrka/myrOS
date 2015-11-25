@@ -25,7 +25,7 @@ export default class TaskPanel extends React.Component {
         const date = new Date();
 
         this.setState({
-            hours: date.getHours(),
+            hours: date.getHours() < 10 ? '0' + date.getHours() : date.getHours(),
             minutes: date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(),
             seconds: date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
         });
