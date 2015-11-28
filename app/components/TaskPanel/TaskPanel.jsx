@@ -1,13 +1,18 @@
-import Clock from 'components/Clock/Clock.jsx';
+import Clock from 'components/Clock/Clock';
 
 import './TaskPanel.less';
 
-export default class TaskPanel extends React.Component {
+@ReactClass
+class TaskPanel extends React.Component {
     render() {
         return (
             <div className="task-panel">
-                <Clock amPm />
+                <div className="clock-container">
+                    <Clock hourFormat="12" />
+                </div>
             </div>
         );
     }
 }
+
+export default TaskPanel;
