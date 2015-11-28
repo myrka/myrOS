@@ -32,7 +32,7 @@ export default {
                         'ReactDOM=react-dom',
                         '_=lodash',
                         'classnames',
-                        '{ReactClass}=<utils/Decorators'
+                        '{ReactClass}=react-core-decorators'
                     ].join(','),
                     'eslint'
                 ].join('!')
