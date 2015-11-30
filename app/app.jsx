@@ -1,18 +1,7 @@
 import 'babel/polyfill';
 
-import TaskPanel from 'components/TaskPanel/TaskPanel.jsx';
+import OSApp from 'components/os-app/OSApp';
 
 import './app.less';
 
-@ReactClass
-class OS extends React.Component {
-    render() {
-        return (
-            <div className="os">
-                <TaskPanel />
-            </div>
-        );
-    }
-}
-
-ReactDOM.render(<OS />, document.getElementById('app-container'));
+ReactDOM.render(<OSApp />, document.getElementById('app-container'));

@@ -1,6 +1,6 @@
-import Clock from 'components/Clock/Clock';
+import Clock from 'components/clock/Clock';
 
-import './TaskPanel.less';
+import './task-panel.less';
 
 @ReactClass
 class TaskPanel extends React.Component {

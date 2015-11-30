@@ -1,4 +1,4 @@
-import './Clock.less';
+import './clock.less';
 
 @ReactClass
 class Clock extends React.Component {
