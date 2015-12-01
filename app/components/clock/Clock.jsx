@@ -11,19 +11,40 @@ class Clock extends React.Component {
     };
 
     state = {
-        dateNow: this._getCurrentDate()
+        hours:      this._getCurrentHours(),
+        minutes:    this._getCurrentMinutes(),
+        seconds:    this._getCurrentSeconds()
     };
 
     _updateDate = () => {
         this.setState({
-            dateNow: this._getCurrentDate()
+            hours:      this._getCurrentHours(),
+            minutes:    this._getCurrentMinutes(),
+            seconds:    this._getCurrentSeconds()
         });
     };
 
-    _getCurrentDate() {
+    _getCurrentHours() {
+        const date = new Date();
+        const hours_24 = date.getHours();
+
+        let hours_12 = hours_24 % 12;
+
+        hours_12 = hours_12 ? hours_12 : 12;
+
+        return(this.props.hourFormat === '12' ? hours_12 : hours_24);
+    }
+
+    _getCurrentMinutes() {
         const date = new Date();
 
-        return date.toLocaleTimeString(this.props.hourFormat === '12' ? 'en-US' : 'en-GB');
+        return (date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes());
+    }
+
+    _getCurrentSeconds() {
+        const date = new Date();
+
+        return (date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds());
     }
 
     componentDidMount() {
@@ -33,7 +54,15 @@ class Clock extends React.Component {
     render() {
         return (
             <span className="clock">
-              {this.state.dateNow}
+            <span className="hours">{this.state.hours}:</span>
+            <span className="minutes">{this.state.minutes}:</span>
+            <span className="seconds">{this.state.seconds} </span>
+            {
+                this.props.hourFormat === '12' ? 
+                    <span className="formatHour">
+                        {this.state.hour >= 12 ? 'PM' : 'AM'}
+                    </span> : null
+            }
             </span>
         );
     }
