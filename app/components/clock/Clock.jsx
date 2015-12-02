@@ -11,30 +11,50 @@ class Clock extends React.Component {
     };
 
     state = {
-        dateNow: this._getCurrentDate()
+        date: new Date()
+    };
+
+    _parseDate = () => {
+        const { date } = this.state;
+        let hours = date.getHours();
+        const minutes = date.getMinutes();
+        const seconds = date.getSeconds();
+
+        hours = this.props.hourFormat === '24' || hours <= 12 ? hours : hours % 12;
+
+        return {
+            hours   : hours < 10 ? `0${hours}` : String(hours),
+            minutes : minutes < 10 ? `0${minutes}` : String(minutes),
+            seconds : seconds < 10 ? `0${seconds}` : String(seconds)
+        };
     };
 
     _updateDate = () => {
-        this.setState({
-            dateNow: this._getCurrentDate()
-        });
+        this.setState({ date: new Date() });
     };
-
-    _getCurrentDate() {
-        const date = new Date();
-
-        return date.toLocaleTimeString(this.props.hourFormat === '12' ? 'en-US' : 'en-GB');
-    }
 
     componentDidMount() {
         setInterval(this._updateDate, 1000);
     }
 
     render() {
+        const { hours, minutes, seconds } = this._parseDate();
+        const time = [ hours, minutes, seconds ].join(':').split('');
+
         return (
-            <span className="clock">
-              {this.state.dateNow}
-            </span>
+            <div className="clock">
+                {
+                    time.map((symbol, index) => (
+                        <div key={index} className={symbol === ':' ? 'separator' : 'number'}>{symbol}</div>
+                    ))
+                }
+                {
+                    this.props.hourFormat === '12' &&
+                        <div className="hour-format">
+                            {this.state.date.getHours() >= 12 ? 'PM' : 'AM'}
+                        </div>
+                }
+            </div>
         );
     }
 }
