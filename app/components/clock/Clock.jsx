@@ -11,59 +11,50 @@ class Clock extends React.Component {
     };
 
     state = {
-        hours:      this._getCurrentHours(),
-        minutes:    this._getCurrentMinutes(),
-        seconds:    this._getCurrentSeconds()
+        date: new Date()
+    };
+
+    _parseDate = () => {
+        const { date } = this.state;
+        let hours = date.getHours();
+        const minutes = date.getMinutes();
+        const seconds = date.getSeconds();
+
+        hours = this.props.hourFormat === '24' || hours <= 12 ? hours : hours % 12;
+
+        return {
+            hours   : hours < 10 ? `0${hours}` : String(hours),
+            minutes : minutes < 10 ? `0${minutes}` : String(minutes),
+            seconds : seconds < 10 ? `0${seconds}` : String(seconds)
+        };
     };
 
     _updateDate = () => {
-        this.setState({
-            hours:      this._getCurrentHours(),
-            minutes:    this._getCurrentMinutes(),
-            seconds:    this._getCurrentSeconds()
-        });
+        this.setState({ date: new Date() });
     };
-
-    _getCurrentHours() {
-        const date = new Date();
-        const hours_24 = date.getHours();
-
-        let hours_12 = hours_24 % 12;
-
-        hours_12 = hours_12 ? hours_12 : 12;
-
-        return(this.props.hourFormat === '12' ? hours_12 : hours_24);
-    }
-
-    _getCurrentMinutes() {
-        const date = new Date();
-
-        return (date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes());
-    }
-
-    _getCurrentSeconds() {
-        const date = new Date();
-
-        return (date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds());
-    }
 
     componentDidMount() {
         setInterval(this._updateDate, 1000);
     }
 
     render() {
+        const { hours, minutes, seconds } = this._parseDate();
+        const time = [ hours, minutes, seconds ].join(':').split('');
+
         return (
-            <span className="clock">
-            <span className="hours">{this.state.hours}:</span>
-            <span className="minutes">{this.state.minutes}:</span>
-            <span className="seconds">{this.state.seconds} </span>
-            {
-                this.props.hourFormat === '12' ? 
-                    <span className="formatHour">
-                        {this.state.hour >= 12 ? 'PM' : 'AM'}
-                    </span> : null
-            }
-            </span>
+            <div className="clock">
+                {
+                    time.map((symbol, index) => (
+                        <div key={index} className={symbol === ':' ? 'separator' : 'number'}>{symbol}</div>
+                    ))
+                }
+                {
+                    this.props.hourFormat === '12' &&
+                        <div className="hour-format">
+                            {this.state.date.getHours() >= 12 ? 'PM' : 'AM'}
+                        </div>
+                }
+            </div>
         );
     }
 }
