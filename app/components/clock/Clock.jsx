@@ -34,7 +34,10 @@ class Clock extends React.Component {
     };
 
     componentDidMount() {
-        setInterval(this._updateDate, 1000);
+        setTimeout(() => {
+            this._updateDate();
+            setInterval(this._updateDate, 1000);
+        }, 1000 - Date.now() % 1000); // syncing clock with real time
     }
 
     render() {
