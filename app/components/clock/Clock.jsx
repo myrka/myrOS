@@ -23,7 +23,7 @@ class Clock extends React.Component {
         hours = this.props.hourFormat === '24' || hours <= 12 ? hours : hours % 12;
 
         return {
-            hours   : hours < 10 ? `0${hours}` : String(hours),
+            hours   : hours < 10 ? ` ${hours}` : String(hours),
             minutes : minutes < 10 ? `0${minutes}` : String(minutes),
             seconds : seconds < 10 ? `0${seconds}` : String(seconds)
         };
