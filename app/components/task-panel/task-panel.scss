@@ -1,0 +1,22 @@
+.task-panel {
+    $color1: #D4ECFD;
+    $color2: #D4EBF7;
+    $color3: #D4ECFC;
+
+    $height: 24px;
+
+    height: $height;
+    border-bottom: 1px solid #243743;
+
+    background-image: linear-gradient($color1, $color2, $color3);
+
+    box-shadow: 0 10px 30px #bbb;
+
+    > .clock-container {
+        float: right;
+
+        margin-right: 15px;
+
+        line-height: $height;
+    }
+}

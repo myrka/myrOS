@@ -1,6 +1,6 @@
 import TaskPanel from 'components/task-panel/TaskPanel';
 
-import './os-app.less';
+import './os-app.scss';
 
 @ReactClass
 class OSApp extends React.Component {

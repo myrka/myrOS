@@ -9,24 +9,27 @@ const output_options = {
 };
 
 const app_path = path.join(__dirname, 'app/');
+const with_source_maps = process.env.SOURCE_MAPS === 'on';
 
 export default {
+    devtool: with_source_maps && '#source-map',
     entry: {
         app: path.join(app_path, 'app.jsx')
     },
     output: {
-        path        : 'public/',
-        publicPath  : 'public/',
-        filename    : '[name].min.js'
+        path: 'public/',
+        publicPath: 'public/',
+        sourceMapFilename: '[file].map',
+        filename: '[name].min.js'
     },
     module: {
         loaders: [
             {
                 test: /\.jsx?/,
                 exclude: /node_modules/,
-                loader: [
+                loaders: [
                     'react-hot',
-                    'babel?optional[]=es7.classProperties&optional[]=es7.objectRestSpread&optional[]=es7.decorators',
+                    'babel',
                     'autoimport?config[]=checkIfUsed&' + [
                         'React=>react',
                         'ReactDOM=react-dom',
@@ -35,19 +38,23 @@ export default {
                         '{ReactClass}=react-core-decorators'
                     ].join(','),
                     'eslint'
-                ].join('!')
+                ]
             },
             {
-                test: /\.less$/,
-                loader: 'style!css!less'
+                test: /\.scss/,
+                loaders: [
+                    'style',
+                    `css${with_source_maps ? '?sourceMap' : ''}`,
+                    `sass${with_source_maps ? '?sourceMap' : ''}`
+                ]
             },
             {
                 test: /\.(png|jpg|svg)$/,
                 loader: 'url?limit=8192&name=[name].[ext]'
             },
             {
-                test: /\.(eot|ttf|woff|svg|svgz|otf)$/,
-                loader: 'file?name=fonts/[name].[ext]'
+                test: /\.(woff|woff2|ttf)$/,
+                loader: `${with_source_maps ? 'url' : 'file'}?name=fonts/[name].[ext]`
             }
 
         ]
