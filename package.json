@@ -7,9 +7,9 @@
     "server": "nodemon --watch server.js --exec babel-node -- server.js",
     "build": "NODE_ENV=production webpack -p --bail",
     "watch": "webpack --progress --watch",
-    "watchs": "SOURCE_MAPS=on webpack --progress --watch",
+    "watchs": "set SOURCE_MAPS=on&&webpack --progress --watch",
     "hot": "webpack-dev-server --inline --hot --progress",
-    "hots": "SOURCE_MAPS=on webpack-dev-server --inline --hot --progress"
+    "hots": "set SOURCE_MAPS=on&&webpack-dev-server --inline --hot --progress"
   },
   "dependencies": {
     "babel": "^6.3.13",

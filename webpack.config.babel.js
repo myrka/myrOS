@@ -9,7 +9,7 @@ const output_options = {
 };
 
 const app_path = path.join(__dirname, 'app/');
-const with_source_maps = process.env.SOURCE_MAPS === 'on';
+const with_source_maps = process.env.SOURCE_MAPS == 'on';
 
 export default {
     devtool: with_source_maps && '#source-map',
