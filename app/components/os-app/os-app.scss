@@ -5,4 +5,8 @@ main {
     font-weight: 400;
 
     background-color: #D2E1EE;
+
+    > .desktop-container {
+        height: calc(100% - 24px);
+    }
 }

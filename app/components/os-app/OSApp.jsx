@@ -1,4 +1,5 @@
 import TaskPanel from 'components/task-panel/TaskPanel';
+import DNDArea from 'components/drag-n-drop-area/DNDArea';
 
 import './os-app.scss';
 
@@ -8,6 +9,9 @@ class OSApp extends React.Component {
         return (
             <main>
                 <TaskPanel />
+                <div className="desktop-container">
+                    <DNDArea />
+                </div>
             </main>
         );
     }
