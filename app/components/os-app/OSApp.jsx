@@ -1,7 +1,7 @@
 import TaskPanel from 'components/task-panel/TaskPanel';
 import DNDArea from 'components/drag-n-drop-area/DNDArea';
 
-import './os-app.less';
+import './os-app.scss';
 
 @ReactClass
 class OSApp extends React.Component {
